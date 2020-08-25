@@ -96,16 +96,19 @@ async def executeFlightLogic():  # Open the file save object, start TXISR, and s
 	recordData(bootCount, antennaDeployed, lastMode)
 
 	if not antennaDeployed:
+		printStatus(2)
 		print('Running Antenna Deployment Mode')
 		await asyncio.gather(antennaDeploy.run())
 		antennaDeployed = True
 		print(antennaDeployed)
 		recordData(bootCount, antennaDeployed, lastMode)  # Save into files
 	elif lastMode == 4:
+		printStatus(lastMode)
 		print('Running Post Boom Deploy')
 		lastMode = 4
 		await asyncio.gather(postBoomDeploy.run())
 	else:
+		printStatus(lastMode)
 		print('Running preBoom Deploy')
 		lastMode = 2
 		await asyncio.gather(preBoomDeploy.run())
@@ -113,6 +116,7 @@ async def executeFlightLogic():  # Open the file save object, start TXISR, and s
 
 	while True: # This loop executes the rest of the flight logic
 	# pre boom deploy
+		printStatus(lastMode)
 		if antennaDeployed == True and lastMode not in (3,4):
 			print('Running pre-Boom deploy')
 			lastMode = 2
@@ -178,6 +182,25 @@ def readData():
 			print('Double File exception - are both files non-existant?')	
 	recordData(bootCount, antennaDeployed, lastMode)
 	return bootCount, antennaDeployed, lastMode
+
+def printStatus(missionMode):
+	print("===========GASPACS flight status============")
+	if(missionMode == 0):
+		print("Mission mode: Boot")
+	elif(missionMode == 1):
+		print("Mission mode: Antenna deploy")
+	elif(missionMode == 2):
+		print("Mission mode: Pre-boom deploy")
+	elif(missionMode == 3):
+		print("Mission mode: Boom deploy")
+	elif(missionMode == 4):
+		print("Mission mode: Post-boom deploy")
+	elif(missionMode == 5):
+		print("Mission mode: Comm-TX")
+	elif(missionMode == 6):
+		print("Mission mode: Safe")
+	elif(missionMode == 7):
+		print("Mission mode: ")
 
 
 # def startTXISR(saveobject):  # Setup for TXISR
