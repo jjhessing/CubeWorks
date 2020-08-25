@@ -39,13 +39,16 @@ class safe:
 				print("Going into SAFE. eps voltage was  "+ str(epsVoltage))
 				self.run(10) #1 hour
 			else:
-				print('Threshold is good')
+				print('Voltage threshold: ', self.thresholdVoltage)
+				print("EPS Voltage: ", epsVoltage)
 			await asyncio.sleep(1) #check voltage every second
 
 	async def heartBeat(self): #Sets up up-and-down voltage on pin 40 for heartbeat with Arduino
 		waitTime = 4
 		while True:
 			GPIO.output(40, GPIO.HIGH)
+			print("Heartbeat status: HIGH")
 			await asyncio.sleep(waitTime/2)
 			GPIO.output(40, GPIO.LOW)
+			print("Heartbeat status: LOW")
 			await asyncio.sleep(waitTime/2)
