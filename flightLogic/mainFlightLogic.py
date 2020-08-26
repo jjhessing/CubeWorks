@@ -184,23 +184,27 @@ def readData():
 	return bootCount, antennaDeployed, lastMode
 
 def printStatus(missionMode):
-	print("===========GASPACS flight status============")
+	status_file = open(os.path.dirname(__file__) + "/Status.txt", "r+")
+	print(status_file.read())
+	data = satus_file.readlines()
 	if(missionMode == 0):
-		print("Mission mode: Boot")
+		data[1] = "Mission mode: Boot"
 	elif(missionMode == 1):
-		print("Mission mode: Antenna deploy")
+		data[1] = "Mission mode: Antenna deploy"
 	elif(missionMode == 2):
-		print("Mission mode: Pre-boom deploy")
+		data[1] = "Mission mode: Pre-boom deploy"
 	elif(missionMode == 3):
-		print("Mission mode: Boom deploy")
+		data[1] ="Mission mode: Boom deploy"
 	elif(missionMode == 4):
-		print("Mission mode: Post-boom deploy")
+		data[1] = "Mission mode: Post-boom deploy"
 	elif(missionMode == 5):
-		print("Mission mode: Comm-TX")
+		data[1] = "Mission mode: Comm-TX"
 	elif(missionMode == 6):
-		print("Mission mode: Safe")
+		data[1] = "Mission mode: Safe"
 	elif(missionMode == 7):
-		print("Mission mode: ")
+		data[1] = "Mission mode: "
+	status_file.writelines(data)
+	status_file.close()
 
 
 # def startTXISR(saveobject):  # Setup for TXISR
