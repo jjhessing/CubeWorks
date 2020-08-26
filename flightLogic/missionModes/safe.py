@@ -39,16 +39,31 @@ class safe:
 				print("Going into SAFE. eps voltage was  "+ str(epsVoltage))
 				self.run(10) #1 hour
 			else:
-				print('Voltage threshold: ', self.thresholdVoltage)
-				print("EPS Voltage: ", epsVoltage)
+				status_file = open(os.path.dirname(__file__) + "/Status.txt", "r+")
+	                        data = satus_file.readlines()
+				data[2] = "Voltage threshold: " + str(self.thresholdVoltage)
+				data[3] = "EPS Voltage: " + str(epsVoltage)
+				status_file.writelines(data)
+				status_file.close()
 			await asyncio.sleep(1) #check voltage every second
 
 	async def heartBeat(self): #Sets up up-and-down voltage on pin 40 for heartbeat with Arduino
 		waitTime = 4
 		while True:
 			GPIO.output(40, GPIO.HIGH)
-			print("Heartbeat status: HIGH")
+			status_file = open(os.path.dirname(__file__) + "/Status.txt", "r+")
+	                data = satus_file.readlines()
+			data[4] = "Heartbeat status: HIGH"
+			status_file.writelines(data)
+			status_file.close()
+			
 			await asyncio.sleep(waitTime/2)
 			GPIO.output(40, GPIO.LOW)
-			print("Heartbeat status: LOW")
+			
+			status_file = open(os.path.dirname(__file__) + "/Status.txt", "r+")
+	                data = satus_file.readlines()
+			data[4] = "Heartbeat status: LOW"
+			status_file.writelines(data)
+			status_file.close()
+			
 			await asyncio.sleep(waitTime/2)
