@@ -34,7 +34,13 @@ async def interrupt():
 				await packetProcessing.processPacket(ax25) #Process AX.25 Packets
 			await asyncio.sleep(5)
 		else: #No contents in serial buffer
-			print('buffer empty')
+			status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "r")
+	                data = satus_file.readlines()
+			status_file.close()
+			data[5] = "Buffer: Empty"
+			status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "w")
+			status_file.writelines(data)
+			status_file.close()
 			await asyncio.sleep(3)
 
 def parseData(data, bracket): #Takes data string, in the form of hex, from async read serial function. Spits out all AX.25 packets and GASPACS packets contained inside, as well as remaining data to be put into the leftovers
