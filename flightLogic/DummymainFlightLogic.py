@@ -181,6 +181,8 @@ def readData():
 			print('Double File exception - are both files non-existant?')	
 	recordData(bootCount, antennaDeployed, lastMode)
 	return bootCount, antennaDeployed, lastMode
+def printStatus():
+	pass
 
 
 # def startTXISR(saveobject):  # Setup for TXISR
