@@ -182,7 +182,29 @@ def readData():
 	recordData(bootCount, antennaDeployed, lastMode)
 	return bootCount, antennaDeployed, lastMode
 def printStatus():
-	pass
+	status_file = open(os.path.dirname(__file__) + "/flightLogic/data/Status.txt", "r")
+	print(status_file.read())
+	data = satus_file.readlines()
+	status_file.close()
+	if(missionMode == 0):
+		data[1] = "Mission mode: Boot"
+	elif(missionMode == 1):
+		data[1] = "Mission mode: Antenna deploy"
+	elif(missionMode == 2):
+		data[1] = "Mission mode: Pre-boom deploy"
+	elif(missionMode == 3):
+		data[1] ="Mission mode: Boom deploy"
+	elif(missionMode == 4):
+		data[1] = "Mission mode: Post-boom deploy"
+	elif(missionMode == 5):
+		data[1] = "Mission mode: Comm-TX"
+	elif(missionMode == 6):
+		data[1] = "Mission mode: Safe"
+	elif(missionMode == 7):
+		data[1] = "Mission mode: "
+	status_file = open(os.path.dirname(__file__) + "/flightLogic/data/Status.txt", "w+")
+	status_file.writelines(data)
+	status_file.close()
 
 
 # def startTXISR(saveobject):  # Setup for TXISR
