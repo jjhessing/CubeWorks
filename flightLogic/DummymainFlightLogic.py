@@ -182,7 +182,7 @@ def readData():
 	recordData(bootCount, antennaDeployed, lastMode)
 	return bootCount, antennaDeployed, lastMode
 def printStatus():
-	status_file = open(os.path.dirname(__file__) + "/flightLogic/data/Status.txt", "r")
+	status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "r")
 	print(status_file.read())
 	data = satus_file.readlines()
 	status_file.close()
@@ -202,7 +202,7 @@ def printStatus():
 		data[1] = "Mission mode: Safe"
 	elif(missionMode == 7):
 		data[1] = "Mission mode: "
-	status_file = open(os.path.dirname(__file__) + "/flightLogic/data/Status.txt", "w+")
+	status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "w+")
 	status_file.writelines(data)
 	status_file.close()
 
