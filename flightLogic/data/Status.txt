@@ -1,0 +1,6 @@
+================ GASPACS status update ================
+Boot mode: 
+Voltage Threshold: 
+Current Voltage: 
+Hearbeat: 
+Buffer: 
