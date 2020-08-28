@@ -67,8 +67,20 @@ class safe:
 		waitTime = 4
 		while True:
 			#GPIO.output(40, GPIO.HIGH)
-			print("Heartbeat wave high")
+			status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "r")
+	                data = satus_file.readlines()
+			status_file.close()
+			data[4] = "Heartbeat: HIGH"
+			status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "w")
+			status_file.writelines(data)
+			status_file.close()
 			await asyncio.sleep(waitTime/2)
 			#GPIO.output(40, GPIO.LOW)
-			print("Heartbeat wave low")
+			status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "r")
+	                data = satus_file.readlines()
+			status_file.close()
+			data[4] = "Heartbeat: LOW"
+			status_file = open(os.path.dirname(__file__) + "/data/Status.txt", "w")
+			status_file.writelines(data)
+			status_file.close()
 			await asyncio.sleep(waitTime/2)
