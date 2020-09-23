@@ -1,8 +1,10 @@
-import os #Won't lie, I have no idea what these do but it appeared that they were required at the beginning of every program like a C directive
+import os
 import sys
+from pathlib import Path
 
-path = "/home/jjhjj/CubeWorks/tests/resetText.txt" #This is just telling us where we want to go, right now it's set to run locally on Josh's computer
-file = open(path,"r+") #This is opening the file and telling python that it can write in it
+base = Path(__file__).parent #sets base as the current file directory
+file_path = (base / "resetText.txt").resolve()#sets the file path to the base
+file = open(file_path, 'r+') #opens the file using the file path
 file.truncate(0) #This is to delete everything
 file.close() #This closes the file so it is no longer being edited
-print("We ran")
+print("We ran") #Shows that the program is finished
