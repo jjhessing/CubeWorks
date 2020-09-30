@@ -1,6 +1,5 @@
 import os
 import sys
-from pathlib import Path
 
 def fileReset(file_path): 
     file = open(file_path, 'r+') #opens the file using the function input
@@ -10,3 +9,4 @@ def dataReset(): #Deletes all data files
     fileReset("flightLogic/data/Attitude_Data.txt") 
     fileReset("flightLogic/data/Deploy_Data.txt")
     fileReset("flightLogic/data/TTNC_Data.txt")
+
