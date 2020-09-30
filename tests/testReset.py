@@ -9,4 +9,3 @@ def dataReset(): #Deletes all data files
     fileReset("flightLogic/data/Attitude_Data.txt") 
     fileReset("flightLogic/data/Deploy_Data.txt")
     fileReset("flightLogic/data/TTNC_Data.txt")
-
