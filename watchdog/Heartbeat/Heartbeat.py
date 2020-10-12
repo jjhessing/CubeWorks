@@ -24,6 +24,7 @@ def longTap():
     setUp()
     while True:
         # send a pulse
+        print("staring my big fat butt")
         GPIO.output(21, GPIO.HIGH)
         time.sleep(waitTime / 2) 
         GPIO.output(21, GPIO.LOW)
