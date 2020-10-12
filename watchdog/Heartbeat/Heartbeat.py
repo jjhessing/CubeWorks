@@ -28,4 +28,4 @@ def longTap():
         time.sleep(waitTime / 2) 
         GPIO.output(21, GPIO.LOW)
         # wait a four seconds.
-        wait(waitTime / 2) 
+        time.sleep(waitTime / 2) 
