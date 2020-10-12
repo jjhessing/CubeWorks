@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import asyncio
 
 # this is the heart beat code. objectives are:
 # 1) A function that sends one pulse
@@ -19,7 +18,7 @@ def setUp():
 
 
 
-async def longTap():
+def longTap():
     waitTime = 4
     setUp()
     while True:
