@@ -3,7 +3,7 @@ import sys
 
 class FileReset():
     """ This will automatically clear all data files and reset other needed files as though the pi was just beginning to boot up. Takes no input. """
-    
+
     FILE_PATHS = [ "TXISR/data/flagsFile.txt" , "TXISR/data/txFile.txt" , "TXISR/data/txWindows.txt" , "flightLogic/backupBootRecords" , "flightLogic/bootRecords" , "flightLogic/data/Attitude_Data.txt" , "flightLogic/data/Deploy_Data.txt" , "flightLogic/data/TTNC_Data.txt" , "TXISR/data/transmissionFlag.txt" , "TXISR/data/AX25Flag.txt"]
 
     #I'm 95% sure this is what you wanted, with all of the code being in __init__ so that it will automatically run if the class is called, however I kept the code we originally wrote where we divided them into different functions down below
@@ -26,7 +26,6 @@ class FileReset():
                 if i == "TXISR/data/AX25Flag.txt":
                     file.write("Disabled")
                 file.close() #This closes the file so it is no longer being edited
-        print("Done")
 
 #This is what we originally wrote
 """
