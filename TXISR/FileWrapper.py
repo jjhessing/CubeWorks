@@ -12,31 +12,36 @@ class FileWrapper():
 
 
     def __init__(self,filename,mode,encoding):
-        self.__filename = filename
-        self.__mode = mode
-        self.__encoding = encoding
-        self.__file = self.openFile(self.__filename,self.__mode,self.__encoding)
+        self.filename = filename
+        self.mode = mode
+        self.encoding = encoding
+        self.closed
+        self.fileType = self.getFileType()
+        self.file = self.openFile(self.__filename,self.__mode,self.__encoding)
 
 
-    def __openFile(self):
+    def openFile(self):
+        """
+        Trys to open the file specified in class constructor. Handles the exceptions as needed.
+        """
         try:
             #try to return a file object
-            return open(self.__filename,mode=self.__mode,encoding=self.__encoding)
+            f = open(self.__filename,mode=self.__mode,encoding=self.__encoding)
+            self.closed = f.closed
+            return f
 
         #catch all the exceptions 
         except FileNotFoundError as fileNotFound:
-            fileType = getFileType()
+            pass
             #TODO:logic for handling based on file type
         except FileExistsError as fileExists:
-            fileType = getFileType()
+            pass
             #TODO:logic for handling based on file type
         except OSError as osError:
-            print("shitt")
-            fileType = getFileType()
+            pass
             #TODO:logic for handling based on file type
         except Exception as exception:
-            print("shitt")
-            fileType = getFileType()
+            pass
             #TODO:logic for handling based on file type
         finally:
             pass
@@ -44,7 +49,7 @@ class FileWrapper():
 
     def getFileType(self):
             """
-            Takes in a filename which includes the file extensions and looks it up in a const dict of file types and returns an int for use in deciding what to do based on the file type
+            Takes the file type of the file specified in the constructor and looks it up in a const dict of file types and returns an int for use in deciding what to do based on the file type
             """
             fileExtension = ""
             for i in range(len(self.__filename)-1,0,-1):
@@ -56,9 +61,12 @@ class FileWrapper():
             except:
                 return -1
 
-    def write(self,message):
+    def write(self,dataToWrite):
+        """
+        Attemps to write to the file while handling exceptions such as TypeErros's and NameErrors
+        """
         try:
-            self.__file.write(message)
+            self.file.write(dataToWrite)
         except TypeError as typeError:
             pass
         except NameError as nameError:
@@ -66,10 +74,22 @@ class FileWrapper():
 
 
     def read(self,bytesToRead = -1):
+        """
+        Attemps to read from the file while handling exceptions
+        """
         try:
-            self.__file.read(bytesToRead)
+            self.file.read(bytesToRead)
         except Exception as e:
             pass
 
 
+    def close(self):
+        """
+        Attemps to close the file handle while handling exceptions
+        """
+        try:
+            self.file.close()
+            self.closed = self.file.closed
+        except Exception as e:
+            pass
         
