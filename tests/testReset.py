@@ -5,12 +5,24 @@ import asyncio
 class FileReset():
     """Run FileReset.fullReset() in asyncio to automatically reset all files."""
 
-    FILE_PATHS = [ "TXISR/data/flagsFile.txt" , "TXISR/data/txFile.txt" , "TXISR/data/txWindows.txt" , "flightLogic/backupBootRecords" , "flightLogic/bootRecords" , "flightLogic/data/Attitude_Data.txt" , "flightLogic/data/Deploy_Data.txt" , "flightLogic/data/TTNC_Data.txt" , "TXISR/data/transmissionFlag.txt" , "TXISR/data/AX25Flag.txt"]
+    #List of file paths as specified by Jack
+    FILE_PATHS = [ 
+        "TXISR/data/flagsFile.txt" , 
+        "TXISR/data/txFile.txt" , 
+        "TXISR/data/txWindows.txt" , 
+        "flightLogic/backupBootRecords" , 
+        "flightLogic/bootRecords" , 
+        "flightLogic/data/Attitude_Data.txt" , 
+        "flightLogic/data/Deploy_Data.txt" , 
+        "flightLogic/data/TTNC_Data.txt" , 
+        "TXISR/data/transmissionFlag.txt" , 
+        "TXISR/data/AX25Flag.txt"]
 
     async def reset(self, file_path):
-        #opens and erases file, if there is no file, it will create the file
+        """Opens and erases file, certain files are then filled with required text. If there is no file under a certain file path, it will create the file."""
         file = open(file_path, 'w')
         await asyncio.sleep(1)
+        #Depending on the file path, replaces the empty file with a string of text based on what data will be written in the file
         if file_path == "flightLogic/backupBootRecords" or file_path == "flightLogic/bootRecords":
             file.write("0\n0\n0\n")
         if file_path == "TXISR/data/flagsFile.txt":
@@ -20,10 +32,12 @@ class FileReset():
         if file_path == "TXISR/data/AX25Flag.txt":
             file.write("Disabled")
         await asyncio.sleep(1)
-        file.close() #This closes the file so it is no longer being edited
+        file.close() 
+        #This closes the file so it is no longer being edited
         await asyncio.sleep(1)
 
     async def fill(self, i):
+        """For testing purposes, fills given files with random stuff so we can erase it."""
         file = open(i, 'a')
         await asyncio.sleep(1)
         file.write("Picanha hamburger flank, biltong shankle tri-tip brisket fatback sausage pig sirloin tail ham venison. Cow bacon kielbasa capicola beef tail ham prosciutto. Doner andouille beef landjaeger, buffalo boudin tail strip steak sirloin cow bacon. Kevin chicken venison ribeye spare ribs strip steak, pig t-bone pork chop meatball bresaola meatloaf landjaeger rump swine. Short ribs pastrami ham meatball.")
@@ -32,7 +46,8 @@ class FileReset():
         await asyncio.sleep(1)
     
     @classmethod
-    async def fullReset(self): #Deletes all data files
+    async def fullReset(self):
+        """Runs reset for all file paths that Jack gave us."""
         await asyncio.gather(
             self.reset(self, self.FILE_PATHS[0]),
             self.reset(self, self.FILE_PATHS[1]),
