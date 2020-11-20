@@ -59,5 +59,3 @@ class FileReset():
         #Runs reset once for a single file.
         self.reset(self, file_path)
         await asyncio.sleep(0)
-
-asyncio.run(FileReset.fullReset())
