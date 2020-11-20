@@ -46,7 +46,6 @@ class FileReset():
             #If it doesn't, it runs reset to create it.
             except OSError:
                 self.reset(self, i)
-                print("Created " + i)
                 await asyncio.sleep(0)
             #Otherwise it just closes the file.
             else:
