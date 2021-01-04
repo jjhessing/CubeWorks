@@ -10,6 +10,7 @@ from flightLogic.missionModes.preBoomDeploy import preBoomMode
 from flightLogic.missionModes.boomDeploy import boomMode
 from flightLogic.missionModes.postBoomDeploy import postBoomMode
 from flightLogic.missionModes import safe
+from protectionProticol import fileProtection as fileChecker
 import asyncio
 from TXISR import pythonInterrupt
 
@@ -160,6 +161,9 @@ def readData():
 	# Line 2 = antenna deployed?
 	# Line 2 = last mission mode
 	bootCount,antennaDeployed,lastMode = None, None, None
+	#TODO 
+	#we need to check this file path to make sure that it works with how the code is set up
+	fileChecker.checkFile("/bootRecords")
 	try:
 		bootFile = open(os.path.dirname(__file__) + "/bootRecords", "r")
 		bootCount = int(bootFile.readline().rstrip())

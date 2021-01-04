@@ -149,6 +149,8 @@ async def processPacket(packetData):
 
 
 def writeTXWindow(windowStart, windowDuration, dataType, pictureNumber, startFromBeginning):
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	# This function will write the TX window packet information to a file. Pass in the window start (delta T), window duration, data type, picture number, and Start From Beginning (1/0).
 	# Note that this function saves the window start as an actual time, not a delta T - this is critical.
 
@@ -171,6 +173,8 @@ def writeTXWindow(windowStart, windowDuration, dataType, pictureNumber, startFro
 	TXWindow_File.close()
 	
 def disableTransmissions():
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	# This function will set a flag that will disable the radio transmissions. We will check the flag before making any transmissions.
 	transmissionFlag_File = open("/home/pi/Integration/CubeWorks/TXISR/data/transmissionFlag.txt", "w")
 	
@@ -181,6 +185,8 @@ def disableTransmissions():
 	transmissionFlag_File.close()
 	
 def enableTransmissions():
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	# This function will set a flag that will disable the radio transmissions. We will check the flag before making any transmissions.
 	transmissionFlag_File = open("/home/pi/Integration/CubeWorks/TXISR/data/transmissionFlag.txt", "w")
 	
@@ -191,6 +197,8 @@ def enableTransmissions():
 	transmissionFlag_File.close()
 	
 def disableAX25():
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	# This function will set a flag that will disable the radio transmissions. We will check the flag before making any transmissions.
 	AX25Flag_File = open("/home/pi/Integration/CubeWorks/TXISR/data/AX25Flag.txt", "w")
 	
@@ -201,6 +209,8 @@ def disableAX25():
 	AX25Flag_File.close()
 	
 def enableAX25():
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	# This function will set a flag that will disable the radio transmissions. We will check the flag before making any transmissions.
 	AX25Flag_File = open("/home/pi/Comms/CubeWorks/TXISR/data/AX25Flag.txt", "w")
 	
@@ -211,6 +221,8 @@ def enableAX25():
 	AX25Flag_File.close()
 	
 def clearTXFile():
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	# This function clears the TX windows file
 	transmissionFlag_File = open("/home/pi/Integration/CubeWorks/TXISR/data/txWindows.txt", "w")
 	
@@ -218,6 +230,8 @@ def clearTXFile():
 	transmissionFlag_File.close()
 	
 def clearTXProgress():
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	# This function will clear the file that saves which timestamp has been transmitted most recently for each data type
 	print("I don't know which file to clear!!!")
 	progressFile = open("/home/pi/Integration/CubeWorks/TXISR/data/flagsFile.txt", "w")

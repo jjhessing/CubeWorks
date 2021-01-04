@@ -4,12 +4,15 @@ import os
 from Drivers.camera import Camera
 from math import ceil
 from binascii import hexlify
+from protectionProticol import fileProtection as fileChecker
 """
 This file sets up 2 methods, prepareData and preparePicture. prepareData is used for Attitude Data, TTNC Data, and Deploy Data. preparePicture is used to prepare the HQ or LQ pictures
 Both prepare functions reset /TXISR/TXServiceCode/txFile.txt, and write to it the duration of the transmission window.
 Then, each line consists of a 10-letter string with the timestamp or index of the packet, folowed by ':' and then the hex content of the packet
 """
 def prepareData(duration, dataType, startFromBeginning):
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	if (dataType == 0): #Attitude Data
 		packetLength = 37 + 14 #Packet length in bytes plus the 7 GASPACS bytes on each end
 		dataFilePath = os.path.join(os.path.dirname(__file__), '../flightLogic/data/Attitude_Data.txt') #Set data file path to respective file
@@ -91,6 +94,8 @@ def prepareData(duration, dataType, startFromBeginning):
 	txDataFile.close()
 
 def preparePicture(duration, dataType, pictureNumber, startFromBeginning):
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	if dataType == 3: #HQ Picture
 		cam = Camera()
 		cam.compressHighResToFiles(pictureNumber)

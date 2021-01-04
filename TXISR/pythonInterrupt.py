@@ -10,6 +10,8 @@ TODO: Implement AX.25 digipeating, probably in packetProcessing.py
 To defray the possibility of half a packet being in the buffer, any half-packets are stored and evaluated the next time around
 """
 async def interrupt():
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	serialport = serial.Serial('/dev/serial0', 115200) #Open serial port. Currently /dev/serial0, might change to the PL011 port for flight article
 	leftovers = '' #Stores any half-packets for evaluation the next loop
 	leftoversEmpty = True
@@ -38,6 +40,8 @@ async def interrupt():
 			await asyncio.sleep(3)
 
 def parseData(data, bracket): #Takes data string, in the form of hex, from async read serial function. Spits out all AX.25 packets and GASPACS packets contained inside, as well as remaining data to be put into the leftovers
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	searching = True
 	gaspacsPackets = []
 	ax25Packets = []
@@ -58,6 +62,8 @@ def parseData(data, bracket): #Takes data string, in the form of hex, from async
 	return gaspacsPackets, ax25Packets, modifiedString
 
 def searchAX25(data): #Finds AX.25 packets stored in the data string, which is a string of hex. Removes it from data, returns AX.25 packet and modified data
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	prefix = '7e7e7e7e7e7e7e7e7e'
 	postfix = '7e7e7e7e'
 	changed = False
@@ -77,6 +83,8 @@ def searchAX25(data): #Finds AX.25 packets stored in the data string, which is a
 
 
 def searchGASPACS(data, str): #Must be passed as a string of hex, for both parameters
+	#check all files to see if they are working
+	fileChecker.fullReset()
 	#Finds command or window packets, bracketed by <str> in <data>. Removes the brackets and the contents in between from <data>. Returns the command contents
 	content=''
 	occurences = findOccurences(data, str)
