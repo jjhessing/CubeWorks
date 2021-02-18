@@ -24,11 +24,19 @@ class Accelerometer:
     super().__init__("Accelerometer")
   """
 
-  def read(self):
+  def read(self, t):
     #accel = adafruit_lsm303_accel.LSM303_Accel(self.i2c)
-    i = float(round(random.randint(0, 10) + random.random(), 2))
-    print (i)
-    print (sys.getsizeof(i))
+    try:
+      if (t == 0):
+        i = float(round(random.randint(0, 10) + random.random(), 2))
+      else:
+        i = int(random.randint(0, 10))
+    except (sys.getsizeof(i)!=16):
+      print(float(0.0))
+    else:
+      print(i)
+    
 
 a = Accelerometer()
-a.read()
+a.read(0)
+a.read(1)
